@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "zf_driver_adc.h": "c",
+        "fft.h": "c",
+        "zf_common_typedef.h": "c",
+        "myheadfile.h": "c",
+        "filter.h": "c",
+        "zf_common_debug.h": "c",
+        "cmath": "c"
+    }
+}
