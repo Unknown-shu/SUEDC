@@ -6,6 +6,7 @@
         "myheadfile.h": "c",
         "filter.h": "c",
         "zf_common_debug.h": "c",
-        "cmath": "c"
+        "cmath": "c",
+        "typeinfo": "c"
     }
 }

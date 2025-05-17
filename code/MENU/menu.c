@@ -18,6 +18,33 @@ MenuPage_Linked_List *menu_head_page_node = NULL; // 菜单链表头指针
 {"TEST", PAGE_JUMP_TYPE, .action.void_func=Test_Page_Init,.display_line_count = 0},
  */
 
+void Harmonic_Page_Init(void)
+{
+    static MenuLine  LineList[] = {
+//            MENU_ITEM_INT_SHOW("ADC_Value", (int16*)&Test, 0),
+//            MENU_ITEM_STATIC_FUNC("DFT_Test", Test, 0),
+            //  MENU_ITEM_ENTER_FUNC("DFT_Test", Test, 0),
+            MENU_ITEM_ENTER_FUNC("DFT_Measure", DFT_Measure, 0),
+
+            MENU_ITEM_FLOAT_SHOW("third_ratio", &third_ratio, 1),
+            MENU_ITEM_FLOAT_SHOW("fifth_ratio", &fifth_ratio, 0),
+
+            MENU_ITEM_FLOAT_EDIT("SQUA_3_min", &SQUARE_third_ratio_min, 0.1, 1),
+            MENU_ITEM_FLOAT_EDIT("SQUA_5_min", &SQUARE_fifth_ratio_min, 0.1, 0),
+
+            MENU_ITEM_FLOAT_EDIT("TRIA_3_min", &TRIANGLE_third_ratio_min, 0.1, 1),
+            MENU_ITEM_FLOAT_EDIT("TRIA_5_max", &TRIANGLE_fifth_ratio_max, 0.1, 0),
+
+            MENU_ITEM_FLOAT_EDIT("SINE_3_max", &SINE_third_ratio_max, 0.1, 1),
+            MENU_ITEM_FLOAT_EDIT("SINE_5_max", &SINE_fifth_ratio_max, 0.1, 0),
+
+            {".",  }
+    };
+    static MenuPage Page = {"Harmonic", .line = LineList, .open_status = 0} ;
+
+    Menu_Push_Node(&Page);
+}
+
 /***********************************************
 * @brief : 主页面初始化
 * @param : void
@@ -44,7 +71,7 @@ void Main_Page_Init(void)
             MENU_ITEM_FLOAT_EDIT("vpp_pt_max:", &vpp_protect_max, 0.1, 0),
             MENU_ITEM_FLOAT_EDIT("vpp_pt_min:", &vpp_protect_min, 0.1, 0),
 
-            MENU_ITEM_FLOAT_SHOW("h2_max", &harmonic2_range_max, 1),
+            MENU_ITEM_PAGE_JUMP("Harmonic", Harmonic_Page_Init, 1),
 
             {".",  }
     };

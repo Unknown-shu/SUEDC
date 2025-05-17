@@ -67,7 +67,7 @@ void core1_main(void)
 //        DFT_Measure();
         MENU_RUN();
 
-        if(menu_head_page_node->page->page_name == "Measure")
+        if(menu_head_page_node->page->page_name == "Measure" || menu_head_page_node->page->page_name == "Harmonic")
         {
             if(wave_type == 0)
                 ips200_show_string(100, 18, "SINE");

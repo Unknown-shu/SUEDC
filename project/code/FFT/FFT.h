@@ -8,7 +8,7 @@
 
 #pragma section all "cpu1_dsram"
 
-#define ADC_SAMPLE_SIZE    320   // 采集数组大小
+#define ADC_SAMPLE_SIZE    3200   // 采集数组大小
 #define SAMPLING_FREQ      160000  // 采样频率
 #define PI                 3.1415926535f
 
@@ -39,6 +39,15 @@ extern float harmonic3_range_max ;
 
 extern float second_ratio ; // 二次谐波幅值比
 extern float third_ratio  ; // 三次谐波幅值比
+
+extern float fifth_ratio  ; // 四次谐波幅值比
+
+extern float SQUARE_third_ratio_min ;
+extern float SQUARE_fifth_ratio_min ;
+extern float TRIANGLE_third_ratio_min ;
+extern float TRIANGLE_fifth_ratio_max ;
+extern float SINE_third_ratio_max ;
+extern float SINE_fifth_ratio_max ;
 
 // 定义复数结构体，包含实部和虚部
 typedef struct {

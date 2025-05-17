@@ -73,7 +73,7 @@ int core0_main(void)
 
     pit_ms_init(CCU60_CH0, 20);
     pit_ms_init(CCU60_CH1, 5);
-    pit_ms_init(CCU61_CH1, 500);
+    pit_ms_init(CCU61_CH1, 1000);
 //    pit_us_init(CCU61_CH0, 3);
     my_pit_init(CCU61_CH0, 6.25);
 
