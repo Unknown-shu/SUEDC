@@ -37,6 +37,9 @@
 #define _zf_common_font_h
 
 #include "zf_common_typedef.h"
+//#include "status.h"
+
+#define gif_show_flag 1
 
 //-------常用颜色----------
 typedef enum
@@ -63,6 +66,12 @@ extern const uint8      ascii_font_6x8[][6];
 extern const uint8      chinese_test[8][16];
 extern const uint8      oled_16x16_chinese[][16];
 extern const uint8      gImage_seekfree_logo[38400];
+
+#define Lani_GIF_cnt            11
+
+#if (gif_show_flag == 1)
+extern const uint8      gImage_Lani_gif[Lani_GIF_cnt][115200];
+#endif
 
 
 #endif

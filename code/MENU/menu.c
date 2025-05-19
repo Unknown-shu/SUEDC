@@ -71,6 +71,8 @@ void Main_Page_Init(void)
             MENU_ITEM_FLOAT_EDIT("vpp_pt_max:", &vpp_protect_max, 0.1, 0),
             MENU_ITEM_FLOAT_EDIT("vpp_pt_min:", &vpp_protect_min, 0.1, 0),
 
+            MENU_ITEM_FLOAT_EDIT("vpp_plus:", &vpp_plus, 0.1, 1),
+
             MENU_ITEM_PAGE_JUMP("Harmonic", Harmonic_Page_Init, 1),
 
             {".",  }

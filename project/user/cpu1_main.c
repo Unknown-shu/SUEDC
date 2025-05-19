@@ -59,6 +59,16 @@ void core1_main(void)
     Menu_Init();
 
 
+    #if (gif_show_flag == 1)
+    for(uint8 i = 0; i < Lani_GIF_cnt; i++)
+    {
+        ips200_show_rgb565_image(0, 0, gImage_Lani_gif[i], 240, 240, 240, 240, 1);
+        system_delay_ms(50);
+    }
+    #endif
+
+    Beep_ShortRing();
+
     // 此处编写用户代码 例如外设初始化代码等
     cpu_wait_event_ready();                 // 等待所有核心初始化完毕
     while (TRUE)

@@ -19,7 +19,8 @@ extern uint8  send_flag;                             // 采集完成标志
 extern uint16 adc_sample_buffer[];  // ADC采样缓冲区
 extern uint16 adc_sample_index;                      // 当前采样索引
 extern float  main_frequency;                        //频率
-extern float  vpp;                                   //峰峰值
+extern float  vpp;
+extern float  vpp_plus;//峰峰值
 extern uint16 wave_type;
 
 extern float  main_frequency_protect_max ; // 保护频率最大值      

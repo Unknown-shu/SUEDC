@@ -6,6 +6,7 @@ uint16 adc_sample_index = 0;
 uint8  send_flag = 0;
 float  main_frequency = 10000;
 float  vpp = 1;
+float  vpp_plus = 0;
 uint16 wave_type = 3;
 
 float  main_frequency_protect_max = 15000;
@@ -39,6 +40,7 @@ float TRIANGLE_fifth_ratio_max = 0.2;
 float SINE_third_ratio_max = 0.2;
 float SINE_fifth_ratio_max = 0.2;
 
+
 #pragma section all restore
 
 #pragma section all "cpu1_psram"
@@ -70,7 +72,6 @@ void Test(void) {
     dft(adc_sample_buffer, ADC_SAMPLE_SIZE);
     computeAmpPhase(ADC_SAMPLE_SIZE);
 
-    printf("\u5e45\u5ea6\u8c31:\r\n");
     for (uint16 i = 0; i < ADC_SAMPLE_SIZE / 2; ++i) {
         printf("%lf, %d\r\n", ampRes[i], i);
     }
@@ -83,7 +84,6 @@ void DFT_Measure(void) {
     dft(adc_sample_buffer, ADC_SAMPLE_SIZE);
     computeAmpPhase(ADC_SAMPLE_SIZE);
 
-    printf("\u5e45\u5ea6\u8c31:\r\n");
     for (uint16 i = 0; i < ADC_SAMPLE_SIZE / 2; ++i) {
         printf("%lf, %d\r\n", ampRes[i], i);
     }
@@ -111,13 +111,16 @@ void DFT_Measure(void) {
     harmonic5_range_min = (max_idx * 5) - (max_idx / 10.0);
     harmonic5_range_max = (max_idx * 5) + (max_idx / 10.0);
 
-    for (uint16 i = harmonic2_range_min; i <= harmonic2_range_max && i < ADC_SAMPLE_SIZE / 2; i++) {
+    for (uint16 i = harmonic2_range_min; i <= harmonic2_range_max && i < ADC_SAMPLE_SIZE / 2; i++)
+    {
         if (ampRes[i] > second_harmonic) second_harmonic = ampRes[i];
     }
-    for (uint16 i = harmonic3_range_min; i <= harmonic3_range_max && i < ADC_SAMPLE_SIZE / 2; i++) {
+    for (uint16 i = harmonic3_range_min; i <= harmonic3_range_max && i < ADC_SAMPLE_SIZE / 2; i++)
+    {
         if (ampRes[i] > third_harmonic) third_harmonic = ampRes[i];
     }
-    for (uint16 i = harmonic5_range_min; i <= harmonic5_range_max && i < ADC_SAMPLE_SIZE / 2; i++) {
+    for (uint16 i = harmonic5_range_min; i <= harmonic5_range_max && i < ADC_SAMPLE_SIZE / 2; i++)
+    {
         if (ampRes[i] > fifth_harmonic) fifth_harmonic = ampRes[i];
     }
 
@@ -125,15 +128,21 @@ void DFT_Measure(void) {
     third_ratio = third_harmonic / fundamental_amp;
     fifth_ratio = fifth_harmonic / fundamental_amp;
 
-    if (third_ratio > SQUARE_third_ratio_min && fifth_ratio > SQUARE_fifth_ratio_min) {
+    if (third_ratio > SQUARE_third_ratio_min && fifth_ratio > SQUARE_fifth_ratio_min)
+    {
         wave_type = SQUARE_WAVE;
-    } else if (third_ratio > TRIANGLE_third_ratio_min && fifth_ratio < TRIANGLE_fifth_ratio_max) {
+    }
+    else if (third_ratio > TRIANGLE_third_ratio_min && fifth_ratio < TRIANGLE_fifth_ratio_max)
+    {
         wave_type = TRIANGLE_WAVE;
-    } else if (third_ratio < SINE_third_ratio_max && fifth_ratio < SINE_fifth_ratio_max) {
+    }
+    else if (third_ratio < SINE_third_ratio_max && fifth_ratio < SINE_fifth_ratio_max)
+    {
         wave_type = SINE_WAVE;
-    } else {
+    }
+    else
+    {
         wave_type = UNKNOWN_WAVE;
-        printf("\u4e09\u6b21:%f, \u4e94\u6b21:%f\r\n", third_ratio, fifth_ratio);
     }
 
     printf("%f, %f, %f, %f\r\n", harmonic5_range_max, harmonic5_range_min, harmonic3_range_max, harmonic3_range_min);
@@ -166,7 +175,7 @@ void Vpp_Cal(void) {
     Sliding_Filter_AddData(&vpp_filter, vpp);
     vpp = Sliding_Filter_GetAverage(&vpp_filter);
     last_vpp = vpp;
-    vpp = (float)(vpp_max + vpp_min) / 4096.0 *3.3;
+    vpp = (float)(vpp_max + vpp_min) / 4096.0 *3.3 + vpp_plus;
 }
 
 #pragma section all restore
